@@ -105,5 +105,5 @@ maintain appropriate steering to stay within the track.
 
         [*http://deepdriving.cs.princeton.edu/paper.pdf*](http://deepdriving.cs.princeton.edu/paper.pdf)
 
-Note: Video for the multi-agent TORCS experiments can be fount at:
+Note: Video for the multi-agent TORCS experiments can be found at:
 <https://www.youtube.com/watch?v=T0XEiCNlq9k>
