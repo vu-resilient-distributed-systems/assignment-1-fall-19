@@ -19,7 +19,7 @@ value, it readjusts its speed in order to accurately maintain dmin. So,
 for this information exchange you will need to setup a TCP network
 between the two cars.
 
-For this experiments you will be given two PID controllers to control
+The code we provide have two PID controllers that control
 the steering and speed of the cars. Brief summary of the cars and their
 controllers are explained below:
 
