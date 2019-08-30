@@ -1,4 +1,4 @@
-**Assignment 1**
+**Assignment 1 - Due September 10**
 
 **Setting up multi-agent car following experiment with TORCS using TCP**
 
