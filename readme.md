@@ -89,7 +89,9 @@ maintain appropriate steering to stay within the track.
 
 **Useful References**
 
--   Setting up TORCS: https://github.com/fmirus/torcs-1.3.7#torcs-137
+-   Installing TORCS: https://github.com/fmirus/torcs-1.3.7#torcs-137
+
+-   Setting up TORCS for multi-car experiments: [Download Slides](https://github.com/vu-resilient-distributed-systems/assignment-1-fall-19/blob/master/Setting%20Up%20Multi-Car%20Experiments%20with%20TORCS.pptx)
 
 -   TORCS Manual:
     [*https://arxiv.org/pdf/1304.1672.pdf*](https://arxiv.org/pdf/1304.1672.pdf)
