@@ -1,31 +1,93 @@
-'''
-Skeleton script which calls the controller and the TorcsEnv scripts
-Invokes the drive_example function which has both the leader car and the follower car functionalities
-Use the PID controllers in Controller.py to complete the code for multi-agent experiment setup.
-'''
+#Main scripts which calls the controller and the TorcsEnv scripts
+#Invokes the drive_example function which has both the leader car and the follower car functionalities
+#Includes random generation of leader car speeds and its position on the track
+#Refer: http://xed.ch/p/snakeoil/ for sensor and actuator functionalities
 
-import Controller
-import TorcsEnv
+import Controller#imports PID controllers
+import TorcsEnv#TORCS simulation functions
+import csv
+import socket
+import threading#for threading
+from threading import Thread
 
-def drive_example(c, num):
-    S, R = c.S.d, c.R.d
+#Variables required for setting the PID controls
+targetSpeed = 60.0 #target speed the leader car has to maintain
+targetStrE = 0.0
+Vl = 0.0 # leader car velocity
 
-    if (num==0):
-        # The leader car code goes here. You will have to use the PID controller to compute steer, speed, gear for the car.
-        # Towards the end of this loop you will have to publish speed information using TCP to the follower car.
+#Define a publisher socket for LeaderCar to publish its Speed Vl
+def Publisher():
 
-    if (num==1):
-        # The follower car controller code goes here. You will have to use the PID controller to compute steer, speed, gear for the car.
-        # You will have to receive speed of leader car using TCP and use in the PID controller code.
+    #Refer to github examples to create publisher sockets
+
+    return sock1
+
+#Define a subscriber socket for the FollowerCar to receive the speed Vl from the LeaderCar.
+def Subscriber():
+
+    #Refer to github examples to create subscriber sockets
+
+    return sock2
+
+#Define a Car1 function that receives the sensor data from the simulator and computes the actuations.
+#Use the Sensor values in the PID controllers from controller.py to compute actuations R['accel'], R['steer'],R['gear']
+#Then respond to the server with the actuation values
+def Car1(sock1,CS):
+    for step in range(CS[0].maxSteps, 0, -1):#The simulation steps
+
+    #1. get sensor inputs
+    CS[0].get_servers_input()
+    S, R = CS[0].S.d, CS[0].R.d #S --sensors and R--actuators
+
+    #2. compute the actuations R['accel'], R['steer'],R['gear'] for the first car using PID controllers for LeaderCar
+    R['steer'] = Controller.steeringControl(S, targetStrE)
+    #do the same for the other actuations
+
+    #3. Send S['SpeedX'] to the followercar using the publisher
+
+    #4. Log or the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
+
+    #5. Respond the actuation values to the simulator
+    CS[0].respond_to_server()
+
+#Define a Car2 function that receives sensor data from simulator, Speed S['SpeedX'] from the leader car and computes the actuations
+#Use the Sensor values in the PID controllers from controller.py to compute actuations R['accel'], R['steer'],R['gear']
+#Then respond to the server with the actuation values
+def Car2(sock2,CS):
+    for step in range(CS[1].maxSteps, 0, -1):#The simulation steps
+
+    #1. Receive the speed Vl from the LeaderCar using the subscriber socket.
+
+    #2. get sensor inputs similar to the Leader Car
+    CS[1].get_servers_input()
+
+    #3. compute the actuations R['accel'], R['steer'],R['gear'] for the first car using PID controllers for LeaderCar
+    [acc, brake, Xr] = Controller.ACCVelocityController(Vl, S)
+    #do the same for the other actuations
+
+    #4. Log the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
+
+    #5. Respond the actuation values to the simulator
+    CS[1].respond_to_server()
+
+
+#Define main which calls three threads one each for LeaderCar, FollowerCar and Buffer
+def main(CS):
+
+    #1. call the publisher and subscriber functions to create publisher and subscriber sockets
+    sock1 = Publisher()
+    sock2 = Subscriber()
+
+    #2. Create three threads to call the LeaderCar, FollowerCar and Buffer functions.
+    FollowerThread = Thread(target=Car2, args = (socket2,CS))
+    FollowerThread.daemon = True
+    FollowerThread.start()
+
+    #do the same for the other car
+
+    #3. Join the threads
 
 if __name__ == "__main__":
-    #Adding different clients (cars) to the TORCS simulation
+    #Adding different clients to the simulation
     CS=[TorcsEnv.Client(p=P) for P in [3001, 3002]]
-    for step in range(CS[0].maxSteps, 0, -1):#The simulation steps
-        num = 0
-        for C in CS:
-            C.get_servers_input()#Get sensor values from the simulator
-            drive_example(C, num)#Invoke the python client for the car controller
-            C.respond_to_server()#Send the actuator control signals to the simulator
-            num+=1
-    C.shutdown()
+    main(CS)#main function
