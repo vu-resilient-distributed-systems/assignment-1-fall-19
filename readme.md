@@ -59,12 +59,10 @@ maintain appropriate steering to stay within the track.
     the leader car to the follower car. The networking section of the Car.py is marked with numbers and you will have to complete it. \[30 points\]
 
 -   Collect the following sensor data of the follower car in a csv file: Speed (in X,
-    Y, Z orientation), position on track, gear, distance from start,
-    distance from opponent, rpm, damage, steer, acceleration, and brake.
-    \[10 points\]
+    Y, Z orientation), position on track, gear, distance from start, damage, steer, acceleration, and brake.
+    \[15 points\]
 
--   Collect the speed (V) of the two cars in csv file and plot them
-    using Matplotlib. \[15 points\]
+-   Plot the speed (S['SpeedX']) of the two cars using Matplotlib. \[10 points\]
 
 -   Answer the following questions: \[15 points\]
 
