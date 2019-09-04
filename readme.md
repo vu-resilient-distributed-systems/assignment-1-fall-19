@@ -87,7 +87,6 @@ maintain appropriate steering to stay within the track.
 
 -   Submit answers to subjective questions.
 
-**TORCS Multi-Car setup Program Flow**
 
 ![Program Flow](https://github.com/vu-resilient-distributed-systems/assignment-1-fall-19/blob/master/ProgramFlow.png)
 
