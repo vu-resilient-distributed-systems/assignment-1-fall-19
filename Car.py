@@ -93,7 +93,7 @@ def main(CS):
     sock2 = Subscriber()
 
     #Create three threads to call the LeaderCar, FollowerCar and Buffer functions.
-    FollowerThread = Thread(target=Car2, args = (socket2,CS))
+    FollowerThread = Thread(target=Car2, args = (sock2,CS))
     FollowerThread.daemon = True
     FollowerThread.start()
 
