@@ -1,62 +1,44 @@
-**Assignment 1 - Due September 10**
+# Assignment 1
 
-**Setting up multi-agent car following experiment with TORCS using TCP**
+**Due September 12**
 
-******************
+The goal of this assignment is to help you understand different mechanisms to setup a distributed communication between two process. As part of the assignment, we have provided you instructions to setup TORCS -- an open source car racing simulator. The instructions are available [here](MultiCarSetupWithTorcs.pdf). Note that you should use a Linux machine, preferably latest version of ubuntu. If you doo not have a linux machine you can try this on a virtual machine. See the instructions for setting up a virtual machine with linux at https://github.com/vu-resilient-distributed-systems/lectures-fall-2019, section getting started.
 
-**Due: 1 week**
+## Assignment Contents
 
-![Program Flow](https://github.com/vu-resilient-distributed-systems/assignment-1-fall-19/blob/master/ProgramFlow.png)
+The assignment folder contains the following files
 
-In this assignment you will learn to use TORCS – An open source car
-racing simulator, and setup an experiment for car platooning. In this
-scenario there will be two cars namely the leader and the follower. The
+* **Car.py** -- this contains the code skeleton for two cars. They receive their state from the simulator, then use the controller to compute the actuation signals and finally send the actuation commands back to the simulator. **The parts of the networking code to be filled have been marked with numbers**. 
+* **Controller.py** -- Two PID controllers that control the steering and speed of the cars. The PID controller of the leader car  takes in the LIDAR data, position sensor, and speed sensor values to compute the steer and speed actions to maintain the car within the
+track. It tries to maintain a  target speed (V = 60 mph) and controls steering to stay within the track. Note the V=60 is set in the car.py at line 14. You can change it to see what happens. But for the initial tasks keep this at 60. The controller for the second car
+es the  PID controllers which takes in the LIDAR data, position sensor, and speed sensor values to compute the steer and speed actions to maintain the car within the track. In addition, it also uses information from the leader car to maintain a minimum distance (d = 10m) from the front car. This expected distance is hard coded in the controller. So do not change it.
+* **TorcsEnv.py** --is the simulator code which has all the functionalities for simulator - controller interaction. (TORCS simulation code)
+
+These three files should be downloaded to your machine. You can use the git clone for that. Your goal is to fill the contents of the car.py to ensure that you are able to simulate the car following scenario as described below.
+
+## Car following scenario
+
+In this scenario there are two cars namely the leader and the follower. The
 leader car is responsible to maintain a set speed for the platoon, and
 to drive within the tracks. The follower car is responsible to follow
 the leader car maintaining a minimum distance (dmin).
 
-Now, for the follower car to maintain an accurate dmin it has to receive
-the speed (V) information of the leader car. Once, it receives the speed
-value, it readjusts its speed in order to accurately maintain dmin. So,
-for this information exchange you will need to setup a TCP network
-between the two cars.
+To maintain an accurate dmin the follower car has to receive
+the speed along the x axis of the leader car. Once, it receives the speed
+value, it readjusts its speed in order to accurately maintain dmin.
 
-The code we provide have two PID controllers that control
-the steering and speed of the cars. Brief summary of the cars and their
-controllers are explained below:
+## Program Flow
 
-**Car 1:** Also referred to as the leader car. Uses two PID controllers
-which take in the LIDAR data, position sensor, and speed sensor values
-to compute the steer and speed actions to maintain the car within the
-track.
+The program flow between the various components is shown in the figure below.
 
-**Goals:** (1) Maintain target speed (V = 60 mph), and (2) maintain
-appropriate steering to stay within the track.
+![Program Flow](https://github.com/vu-resilient-distributed-systems/assignment-1-fall-19/blob/master/ProgramFlow.png)
 
-**Car 2:** Also referred to as the follower car. Uses two PID
-controllers which takes in the LIDAR data, position sensor, and speed
-sensor values to compute the steer and speed actions to maintain the car
-within the track. In addition, it also uses information from the leader
-car to maintain a minimum distance (d = 10m) from the front car.
 
-**Goals:** (1) Maintain minimum distance from the leader car, and (2)
-maintain appropriate steering to stay within the track.
+## Tasks to be completed
 
-*****
-
-**Scripts** 
--   Controller.py has the PID controllers for the two cars. (helper controller functions)
-
--   TorcsEnv.py is the simulator code which has all the functionalities for simulator - controller interaction. (TORCS simulation code)
-
--   Car.py has the skeleton code which has to be completed by you for the assignment. The parts of the networking code to be filled have been marked with numbers. (only script that has to be completed)
-
-**Tasks to be completed**
-
--   Installing and setting up TORCS for the experiment. \[30 points\]
-
--   Setup a TCP network between the Car’s to relay speed information of
-    the leader car to the follower car. The networking section of the Car.py is marked with numbers and you will have to complete it. \[30 points\]
+-   Reading and write a reconstructive summary of the [publish subscribe paper](https://github.com/vu-resilient-distributed-systems/lectures-fall-2019/blob/master/Module-2-MiddlewareAndBackend/reading/TheManyFacesOfPublishSubscribe.pdf). Focus on the concepts learned and concepts that you have a question about. 
+-  Installing and setting up TORCS for the experiment. \[10 points\]
+-  Setup a TCP network between the Car’s to relay speed information of     the leader car to the follower car. The networking section of the Car.py is marked with numbers and you will have to complete it. \[30 points\]
 
 -   Collect the following sensor data of the follower car in a csv file: Speed (in X,
     Y, Z orientation), position on track, gear, distance from start, damage, steer, acceleration, and brake.
