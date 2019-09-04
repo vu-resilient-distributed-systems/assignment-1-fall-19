@@ -6,6 +6,8 @@
 
 **Due: 1 week**
 
+![Program Flow](https://github.com/vu-resilient-distributed-systems/assignment-1-fall-19/blob/master/ProgramFlow.png)
+
 In this assignment you will learn to use TORCS – An open source car
 racing simulator, and setup an experiment for car platooning. In this
 scenario there will be two cars namely the leader and the follower. The
@@ -43,18 +45,18 @@ maintain appropriate steering to stay within the track.
 *****
 
 **Scripts** 
--   Controller.py has the PID controllers for the two cars.
+-   Controller.py has the PID controllers for the two cars. (helper controller functions)
 
--   TorcsEnv.py is the simulator code which has all the functionalities for simulator - controller interaction.
+-   TorcsEnv.py is the simulator code which has all the functionalities for simulator - controller interaction. (TORCS simulation code)
 
--   Car.py is the skeleton code which has to be completed by you for the platoon experiment.
+-   Car.py has the skeleton code which has to be completed by you for the assignment. The parts of the networking code to be filled have been marked with numbers. (only script that has to be completed)
 
 **Tasks to be completed**
 
 -   Installing and setting up TORCS for the experiment. \[30 points\]
 
 -   Setup a TCP network between the Car’s to relay speed information of
-    the leader car to the follower car. \[30 points\]
+    the leader car to the follower car. The networking section of the Car.py is marked with numbers and you will have to complete it. \[30 points\]
 
 -   Collect the following sensor data of the follower car in a csv file: Speed (in X,
     Y, Z orientation), position on track, gear, distance from start,
@@ -87,8 +89,6 @@ maintain appropriate steering to stay within the track.
 
 -   Submit answers to subjective questions.
 
-
-![Program Flow](https://github.com/vu-resilient-distributed-systems/assignment-1-fall-19/blob/master/ProgramFlow.png)
 
 **Useful References**
 
