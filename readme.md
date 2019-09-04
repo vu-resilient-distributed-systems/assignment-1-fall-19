@@ -87,6 +87,10 @@ maintain appropriate steering to stay within the track.
 
 -   Submit answers to subjective questions.
 
+**TORCS Multi-Car setup Program Flow**
+
+![Program Flow](https://github.com/Shreyasramakrishna90/TORCS/blob/master/TORCS%20Program%20Flow.png)
+
 **Useful References**
 
 -   Installing TORCS: https://github.com/fmirus/torcs-1.3.7#torcs-137
