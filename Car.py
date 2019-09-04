@@ -41,6 +41,8 @@ def Car1(sock1,CS):
 
     #2. compute the actuations R['accel'], R['steer'],R['gear'] for the first car using PID controllers for LeaderCar
     R['steer'] = Controller.steeringControl(S, targetStrE)
+    R['accel'] = Controller.speedControl(S, R, targetSpeed)
+    R['gear'] = Controller.automaticGear(S)
     #do the same for the other actuations
 
     #3. Send S['SpeedX'] to the followercar using the publisher
