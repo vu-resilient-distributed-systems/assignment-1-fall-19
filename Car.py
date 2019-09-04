@@ -18,14 +18,14 @@ Vl = 0.0 # leader car velocity
 #Define a publisher socket for LeaderCar to publish its Speed Vl
 def Publisher():
 
-    #Refer to github examples to create publisher sockets
+    #Refer to github examples to create TCP Client socket
 
     return sock1
 
 #Define a subscriber socket for the FollowerCar to receive the speed Vl from the LeaderCar.
 def Subscriber():
 
-    #Refer to github examples to create subscriber sockets
+    #Refer to github examples to create TCP Server socket
 
     return sock2
 
@@ -33,6 +33,8 @@ def Subscriber():
 #Use the Sensor values in the PID controllers from controller.py to compute actuations R['accel'], R['steer'],R['gear']
 #Then respond to the server with the actuation values
 def Car1(sock1,CS):
+    #0. Connect to car2's server socket
+    
     for step in range(CS[0].maxSteps, 0, -1):#The simulation steps
 
     #1. get sensor inputs
@@ -56,9 +58,12 @@ def Car1(sock1,CS):
 #Use the Sensor values in the PID controllers from controller.py to compute actuations R['accel'], R['steer'],R['gear']
 #Then respond to the server with the actuation values
 def Car2(sock2,CS):
+    #0. Listen on the server socket
+    #1. Accept the connection from car1. Use the accepted socket to receive input below
+    
     for step in range(CS[1].maxSteps, 0, -1):#The simulation steps
 
-    #1. Receive the speed Vl from the LeaderCar using the subscriber socket.
+    #1. Receive the speed value sent by the car 1 as a new variable Vl from the LeaderCar using the subscriber socket.
 
     #2. get sensor inputs similar to the Leader Car
     CS[1].get_servers_input()
