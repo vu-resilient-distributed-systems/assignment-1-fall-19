@@ -85,7 +85,7 @@ def Car2(sock2,CS):
     CS[1].respond_to_server()
 
 
-#Define main which calls three threads one each for LeaderCar, FollowerCar and Buffer
+#Define main which calls three threads one each for LeaderCar, FollowerCar
 def main(CS):
 
     #call the publisher and subscriber functions to create publisher and subscriber sockets
