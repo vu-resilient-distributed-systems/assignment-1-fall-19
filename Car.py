@@ -33,42 +33,44 @@ def Subscriber():
 #Use the Sensor values in the PID controllers from controller.py to compute actuations R['accel'], R['steer'],R['gear']
 #Then respond to the server with the actuation values
 def Car1(sock1,CS):
-    #0. Connect to car2's server socket
+    #1. Connect to car2's server socket
     
     for step in range(CS[0].maxSteps, 0, -1):#The simulation steps
 
-    #1. get sensor inputs
+    #2. get sensor inputs
     CS[0].get_servers_input()
     S, R = CS[0].S.d, CS[0].R.d #S --sensors and R--actuators
 
-    #2. compute the actuations R['accel'], R['steer'],R['gear'] for the first car using PID controllers for LeaderCar
+    #3. compute the actuations R['accel'], R['steer'],R['gear'] for the first car using PID controllers for LeaderCar
     R['steer'] = Controller.steeringControl(S, targetStrE)
     R['accel'] = Controller.speedControl(S, R, targetSpeed)
     R['gear'] = Controller.automaticGear(S)
     #do the same for the other actuations
 
-    #3. Send S['SpeedX'] to the followercar using the publisher
+    #4. Send S['SpeedX'] to the followercar using the publisher
 
-    #4. Log the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
+    #5. Log the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
 
-    #5. Respond the actuation values to the simulator
+    # Respond the actuation values to the simulator
     CS[0].respond_to_server()
 
 #Define a Car2 function that receives sensor data from simulator, Speed S['SpeedX'] from the leader car and computes the actuations
 #Use the Sensor values in the PID controllers from controller.py to compute actuations R['accel'], R['steer'],R['gear']
 #Then respond to the server with the actuation values
 def Car2(sock2,CS):
-    #0. Listen on the server socket
-    #1. Accept the connection from car1. Use the accepted socket to receive input below
+    #1. Listen on the server socket
+    
+    #2. Accept the connection from car1. Use the accepted socket to receive input below
     
     for step in range(CS[1].maxSteps, 0, -1):#The simulation steps
 
-    #1. Receive the speed value sent by the car 1 as a new variable Vl from the LeaderCar using the subscriber socket.
+    #3. Receive the speed value sent by the car 1 as a new variable Vl from the LeaderCar using the subscriber socket.
 
-    #2. get sensor inputs similar to the Leader Car
+    #get sensor inputs similar to the Leader Car
     CS[1].get_servers_input()
+    S, R = CS[1].S.d, CS[1].R.d #S --sensors and R--actuators
 
-    #3. compute the actuations R['accel'], R['steer'],R['gear'] for the first car using PID controllers for LeaderCar
+    #compute the actuations R['accel'], R['steer'],R['gear'] for the first car using PID controllers for LeaderCar
     #Vl refers to the speed S['SpeedX'] of the LeaderCar
     R['steer'] = Controller.ACCSteeringController(S)
     [acc, brake, Xr] = Controller.ACCVelocityController(Vl, S)
@@ -79,25 +81,25 @@ def Car2(sock2,CS):
 
     #4. Log the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
 
-    #5. Respond the actuation values to the simulator
+    #Respond the actuation values to the simulator
     CS[1].respond_to_server()
 
 
 #Define main which calls three threads one each for LeaderCar, FollowerCar and Buffer
 def main(CS):
 
-    #1. call the publisher and subscriber functions to create publisher and subscriber sockets
+    #call the publisher and subscriber functions to create publisher and subscriber sockets
     sock1 = Publisher()
     sock2 = Subscriber()
 
-    #2. Create three threads to call the LeaderCar, FollowerCar and Buffer functions.
+    #Create three threads to call the LeaderCar, FollowerCar and Buffer functions.
     FollowerThread = Thread(target=Car2, args = (socket2,CS))
     FollowerThread.daemon = True
     FollowerThread.start()
 
-    #do the same for the other car
+    #1. do the same for the other car
 
-    #3. Join the threads
+    #2. Join the threads
 
 if __name__ == "__main__":
     #Adding different clients to the simulation
