@@ -64,7 +64,12 @@ def Car2(sock2,CS):
     CS[1].get_servers_input()
 
     #3. compute the actuations R['accel'], R['steer'],R['gear'] for the first car using PID controllers for LeaderCar
+    #Vl refers to the speed S['SpeedX'] of the LeaderCar
+    R['steer'] = Controller.ACCSteeringController(S)
     [acc, brake, Xr] = Controller.ACCVelocityController(Vl, S)
+    R['accel'] = acc
+    R['brake'] = brake
+    R['gear'] = Controller.automaticGear(S)
     #do the same for the other actuations
 
     #4. Log the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
