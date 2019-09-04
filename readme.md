@@ -97,6 +97,8 @@ maintain appropriate steering to stay within the track.
 
 -   Setting up TORCS for multi-car experiments (important to get started): [PDF](https://github.com/vu-resilient-distributed-systems/assignment-1-fall-19/blob/master/Setting%20Up%20Multi-Car%20Experiments%20with%20TORCS.pdf)
 
+-   Reference Code for using sensors and actuators in TORCS: http://xed.ch/p/snakeoil/
+
 -   TORCS Manual:
     [*https://arxiv.org/pdf/1304.1672.pdf*](https://arxiv.org/pdf/1304.1672.pdf)
 
