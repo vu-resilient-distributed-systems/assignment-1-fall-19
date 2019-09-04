@@ -45,7 +45,6 @@ def Car1(sock1,CS):
     R['steer'] = Controller.steeringControl(S, targetStrE)
     R['accel'] = Controller.speedControl(S, R, targetSpeed)
     R['gear'] = Controller.automaticGear(S)
-    #do the same for the other actuations
 
     #4. Send S['SpeedX'] to the followercar using the publisher
 
@@ -77,18 +76,17 @@ def Car2(sock2,CS):
     R['accel'] = acc
     R['brake'] = brake
     R['gear'] = Controller.automaticGear(S)
-    #do the same for the other actuations
 
-    #4. Log the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
+    #4. Log the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer.
 
     #Respond the actuation values to the simulator
     CS[1].respond_to_server()
 
 
-#Define main which calls three threads one each for LeaderCar, FollowerCar
+#Define main which calls three threads one each for LeaderCar, FollowerCar.
 def main(CS):
 
-    #call the publisher and subscriber functions to create publisher and subscriber sockets
+    #call the publisher and subscriber functions to create publisher and subscriber sockets.
     sock1 = Publisher()
     sock2 = Subscriber()
 
