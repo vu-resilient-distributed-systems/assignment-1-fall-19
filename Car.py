@@ -45,7 +45,7 @@ def Car1(sock1,CS):
 
     #3. Send S['SpeedX'] to the followercar using the publisher
 
-    #4. Log or the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
+    #4. Log the sensor and actuator data S['SpeedX'], S['SpeedY'], S['SpeedZ'], R['accel'], R['steer'], R['gear'] to a buffer
 
     #5. Respond the actuation values to the simulator
     CS[0].respond_to_server()
