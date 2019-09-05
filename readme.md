@@ -2,7 +2,7 @@
 
 **Due September 12 2359 CST**
 
-The goal of this assignment is to help you understand different mechanisms to setup a distributed communication between two process. As part of the assignment, we have provided you instructions to setup TORCS -- an open source car racing simulator. The instructions are available [here](MultiCarSetupWithTorcs.pdf). Note that you should use a Linux machine, preferably latest version of ubuntu. If you doo not have a linux machine you can try this on a virtual machine. See the instructions for setting up a virtual machine with linux at https://github.com/vu-resilient-distributed-systems/lectures-fall-2019, section getting started.
+The goal of this assignment is to help you understand different mechanisms to setup a distributed communication between two process. As part of the assignment, we have provided you instructions to setup TORCS -- an open source car racing simulator. The instructions are available below (Setting up the virtual machine and installing torcs). Note that you should use a Linux machine, ubuntu 18.04. If you doo not have a linux machine you can try this on a virtual machine. See the instructions for setting up a virtual machine with linux at https://github.com/vu-resilient-distributed-systems/lectures-fall-2019, section getting started.
 
 ## Assignment Contents
 
@@ -32,6 +32,39 @@ value, it readjusts its speed in order to accurately maintain dmin.
 The program flow between the various components is shown in the figure below.
 
 ![Program Flow](https://github.com/vu-resilient-distributed-systems/assignment-1-fall-19/blob/master/ProgramFlow.png)
+
+## Setting up the virtual machine and installing torcs
+
+
+Assuming ubuntu 18.04. Ensure that you give enough video memory > 32 MB on the virtual machine settings
+
+### Install packages
+
+apt-get install libglib2.0-dev  libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev  libplib-dev  libopenal-dev libalut-dev libxi-dev libxmu-dev libxrender-dev  libxrandr-dev libpng-dev libvorbis-dev
+
+### Compile
+
+git clone https://github.com/fmirus/torcs-1.3.7.git
+
+cd torcs-1.3.7
+export CFLAGS="-fPIC"
+export CPPFLAGS=$CFLAGS
+export CXXFLAGS=$CFLAGS
+
+./configure --prefix=$HOME/torcs-install
+
+make
+make install
+make datainstall
+
+sudo pip3 install numpy
+python3 car.py
+
+cd $HOME/torcs-install/bin
+./torcs
+
+now follow instructions from [MultiCarSetupWithTorcs.pdf](MultiCarSetupWithTorcs.pdf)
+
 
 
 ## Tasks to be completed
