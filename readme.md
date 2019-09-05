@@ -1,6 +1,6 @@
 # Assignment 1
 
-**Due September 12**
+**Due September 12 2359 CST**
 
 The goal of this assignment is to help you understand different mechanisms to setup a distributed communication between two process. As part of the assignment, we have provided you instructions to setup TORCS -- an open source car racing simulator. The instructions are available [here](MultiCarSetupWithTorcs.pdf). Note that you should use a Linux machine, preferably latest version of ubuntu. If you doo not have a linux machine you can try this on a virtual machine. See the instructions for setting up a virtual machine with linux at https://github.com/vu-resilient-distributed-systems/lectures-fall-2019, section getting started.
 
