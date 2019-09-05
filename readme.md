@@ -46,22 +46,26 @@ apt-get install libglib2.0-dev  libgl1-mesa-dev libglu1-mesa-dev  freeglut3-dev 
 
 git clone https://github.com/fmirus/torcs-1.3.7.git
 
-cd torcs-1.3.7
-export CFLAGS="-fPIC"
-export CPPFLAGS=$CFLAGS
-export CXXFLAGS=$CFLAGS
+* cd torcs-1.3.7
+* export CFLAGS="-fPIC"
+* export CPPFLAGS=$CFLAGS
+* export CXXFLAGS=$CFLAGS
 
-./configure --prefix=$HOME/torcs-install
+* ./configure --prefix=$HOME/torcs-install
 
-make
-make install
-make datainstall
+* make
 
-sudo pip3 install numpy
-python3 car.py
+* make install
 
-cd $HOME/torcs-install/bin
-./torcs
+* make datainstall
+
+* sudo pip3 install numpy
+
+* python3 car.py
+
+* cd $HOME/torcs-install/bin
+
+* ./torcs
 
 now follow instructions from [MultiCarSetupWithTorcs.pdf](MultiCarSetupWithTorcs.pdf)
 
