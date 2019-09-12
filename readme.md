@@ -84,8 +84,7 @@ Check in all your code into separate folders and specify which task does the cod
 
 -  Answer the following questions
     -   Is TCP or UDP better for a V2V network in this experiment?
-        Compare time overhead for a TCP reply vs. the criticality of the
-        information being relayed. \[10 points\]
+        Compare time overhead for a TCP reply vs. MQTT vs ZMQ \[10 points\]
 
 **Submissions**
 
